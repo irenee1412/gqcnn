@@ -1,6 +1,7 @@
 # import 
 import cv2 
 from perception import ColorImage, BinaryImage
+import os
 
 # parameters, change them, test and optimize for your use case
 BINARY_IM_MAX_VAL = np.iinfo(np.uint8).max
@@ -21,7 +22,8 @@ def binary_segmask(image, background, output_dir, filename):
     :return: binary_subtract_pruned
     """
 
-    background = cv2.imread(background)
+    background1 = cv2.imread(background)
+    background = background1.resize((,))
     # convert img to grayscale
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     background_gray = cv2.cvtColor(background, cv2.COLOR_BGR2GRAY)
@@ -39,3 +41,11 @@ def binary_segmask(image, background, output_dir, filename):
     np.save('%s/%s_binary.npy' % (output_dir, filename), binary_subtract_pruned._image_data())
     cv2.imwrite('%s/%s_binary.png' % (output_dir, filename), binary_subtract_pruned._image_data())
     return binary_subtract_pruned
+
+if __name__ == "__main__":
+    
+    image = cv2.imread()
+    output_dir = 'define file adress'
+    filename = segment
+    
+    binary_segmask()
